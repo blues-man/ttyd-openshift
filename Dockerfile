@@ -13,7 +13,7 @@ RUN touch /workspace/kubeconfig && chmod 664 /workspace/kubeconfig
 
 RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm && \
       microdnf -y install gzip tar wget jq vim-enhanced nano git maven && \
-      microdnf -y install java-11-openjdk-headless --nodocs && \
+      microdnf -y install java-11-openjdk-devel --nodocs && \
       chmod 775 /workspace && \
       wget https://github.com/tsl0922/ttyd/releases/download/1.6.1/ttyd_linux.x86_64 -O /usr/bin/ttyd && \
       chmod 755 /usr/bin/ttyd && \
