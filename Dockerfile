@@ -51,7 +51,7 @@ RUN curl -sL -o /tmp/kamel.tar.gz https://mirror.openshift.com/pub/openshift-v4/
 RUN curl -sL -o /usr/local/bin/odo https://mirror.openshift.com/pub/openshift-v4/clients/odo/latest/odo-linux-amd64 && \
       chmod +x /usr/local/bin/odo
 
-RUN curl -sL -o /tmp/kn.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/serverless/latest/kn-linux-amd64-0.13.2.tar.gz && \
+RUN curl -sL -o /tmp/kn.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/serverless/latest/kn-linux-amd64-0.17.3.tar.gz && \
       tar -C /tmp -xf /tmp/kn.tar.gz --no-same-owner && \
       mv /tmp/kn /usr/local/bin && \
       chmod +x /usr/local/bin/kn && \
