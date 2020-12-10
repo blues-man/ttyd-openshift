@@ -7,9 +7,11 @@ WORKDIR /workspace
 ENV KUBECONFIG=/workspace/kubeconfig
 
 ENV MAVEN_VERSION=3.6.3
-ENV USER_HOME_DIR="/home"
+ENV USER_HOME_DIR="/workspace"
 ENV BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 ENV MAVEN_HOME /usr/share/maven
+ENV MAVEN_CONFIG "$USER_HOME_DIR/.m2"
+
 
 RUN touch /workspace/kubeconfig && chmod 664 /workspace/kubeconfig
 
