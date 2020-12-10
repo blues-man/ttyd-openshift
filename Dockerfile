@@ -42,7 +42,7 @@ RUN curl -sL -o /tmp/tkn.tar.gz https://mirror.openshift.com/pub/openshift-v4/cl
       chmod +x /usr/local/bin/tkn && \
       rm /tmp/tkn*
 
-RUN curl -sL -o /tmp/kamel.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/camel-k/latest/camel-k-client-1.0-linux-64bit.tar.gz && \
+RUN curl -sL -o /tmp/kamel.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/camel-k/latest/camel-k-client-1.2.0-linux-64bit.tar.gz && \
       tar -C /tmp -xf /tmp/kamel.tar.gz --no-same-owner && \
       mv /tmp/kamel /usr/local/bin && \
       chmod +x /usr/local/bin/kamel && \
