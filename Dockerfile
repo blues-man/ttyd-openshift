@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi7/ubi-minimal
+FROM registry.access.redhat.com/ubi8/ubi-minimal
 EXPOSE 7681
 
 ENTRYPOINT ["/usr/bin/ttyd"]
@@ -6,14 +6,26 @@ CMD ["bash"]
 WORKDIR /workspace
 ENV KUBECONFIG=/workspace/kubeconfig
 
+ENV MAVEN_VERSION=3.6.3
+ENV USER_HOME_DIR="/home"
+ENV BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ENV MAVEN_HOME /usr/share/maven
+
 RUN touch /workspace/kubeconfig && chmod 664 /workspace/kubeconfig
 
 RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E %rhel).noarch.rpm && \
-      microdnf -y install gzip tar wget jq vim-enhanced nano git && \
+      microdnf -y install gzip tar wget jq vim-enhanced nano git  && \
+      microdnf -y install java-11-openjdk-headless --nodocs && \
       chmod 775 /workspace && \
       wget https://github.com/tsl0922/ttyd/releases/download/1.6.1/ttyd_linux.x86_64 -O /usr/bin/ttyd && \
       chmod 755 /usr/bin/ttyd && \
       microdnf clean all
+
+RUN mkdir -p /usr/share/maven /usr/share/maven/ref \
+      && curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz \
+      && tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 \
+      && rm -f /tmp/apache-maven.tar.gz \
+      && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 
 RUN curl -sL -o /tmp/oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz && \
       tar -C /tmp -xf /tmp/oc.tar.gz --no-same-owner && \
