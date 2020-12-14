@@ -19,6 +19,8 @@ RUN rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-$(rpm -E 
       chmod 755 /usr/bin/ttyd && \
       microdnf clean all
 
+RUN mkdir -p /.m2/repository && chmod 775 /.m2/repository
+
 
 RUN curl -sL -o /tmp/oc.tar.gz https://mirror.openshift.com/pub/openshift-v4/clients/ocp/latest/openshift-client-linux.tar.gz && \
       tar -C /tmp -xf /tmp/oc.tar.gz --no-same-owner && \
